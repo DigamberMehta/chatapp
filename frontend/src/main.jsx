@@ -6,7 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/HomePage";
 import { AuthProvider } from "./context/authContext";
-
+import CallHistory from "./components/home/CallHistory";
+import ChatBot from "./components/ChatBot/chatBot";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +16,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/call",
+        element: <CallHistory />,
+      },
+      {
+        path: "/chatbot",
+        element: <ChatBot />,
       },
       {
         path: "/auth",

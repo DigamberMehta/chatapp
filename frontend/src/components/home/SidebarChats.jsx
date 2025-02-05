@@ -5,8 +5,14 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 const SidebarChats = () => {
   return (
     <div className="w-96 h-screen bg-white text-gray-900 shadow-lg flex flex-col">
+        {/* Header */}
+        <div className="p-4">
+            <h2 className="text-xl font-bold text-gray-800">Chats</h2>
+        </div>
+
+
       {/* Search Bar */}
-      <div className="p-4 border-b border-gray-300 bg-white">
+      <div className="p-4 bg-white">
         <div className="relative">
           <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           <Input
@@ -35,8 +41,8 @@ const ChatItem = ({ name, message, time }) => {
         <AvatarFallback>{name.charAt(0)}</AvatarFallback>
       </Avatar>
       <div className="ml-3 flex-1">
-        <div className="font-bold text-gray-800 text-sm">{name}</div>
-        <div className="text-sm text-gray-600 truncate w-48">{message}</div>
+        <div className="text-[#111b21] font-normal text-sm">{name}</div>
+        <div className="text-[13px] text-[#667781] truncate w-48">{message}</div>
       </div>
       <div className="text-xs text-gray-500 absolute right-4 top-1/2 transform -translate-y-1/2 transition-all duration-200 ease-in-out group-hover:scale-110 group-hover:text-gray-700">
         {time}

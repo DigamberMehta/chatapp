@@ -1,5 +1,6 @@
 import { Send, MoreVertical } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Chatbot from "@/components/ChatBot/chatBot";
 
 const ChatArea = () => {
   return (
@@ -28,6 +29,7 @@ const ChatArea = () => {
           <Send size={20} />
         </button>
       </div>
+      
     </div>
   );
 };
