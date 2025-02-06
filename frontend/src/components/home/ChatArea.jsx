@@ -1,13 +1,19 @@
-import { Send, MoreVertical } from "lucide-react";
+import { SendHorizontal, MoreVertical } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import Chatbot from "@/components/ChatBot/chatBot";
+import image from "@/assets/image.png";
+import { Plus } from 'lucide-react';
 
 const ChatArea = () => {
   return (
     <div className="flex flex-1 flex-col h-screen bg-white shadow-md">
       {/* Header */}
       <div className="p-4 border-b flex justify-between items-center bg-gray-100">
+        <div className="flex items-center gap-2">
+        <Avatar className="w-10 h-10">
+          <AvatarImage src={image} alt="Community Chat" className="object-cover" />
+        </Avatar>
         <h2 className="text-lg font-semibold text-gray-800">Community Chat</h2>
+        </div>
         <MoreVertical className="text-gray-600 cursor-pointer" />
       </div>
 
@@ -19,14 +25,15 @@ const ChatArea = () => {
       </div>
 
       {/* Message Input */}
-      <div className="p-4 border-t bg-gray-100 flex items-center gap-2">
+      <div className="p-4  bg-gray-50 flex items-center gap-2">
+        <Plus size={26} className="text-gray-600 cursor-pointer" />
         <input
           type="text"
           placeholder="Type a message..."
-          className="flex-1 p-2 border rounded-full outline-none text-gray-700 bg-white shadow-sm"
+          className="flex-1 p-2 border rounded-full outline-none text-gray-700 bg-white shadow-sm text-sm"
         />
-        <button className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600">
-          <Send size={20} />
+        <button className="p-2 bg-green-500 text-white rounded-full">
+          <SendHorizontal size={20} />
         </button>
       </div>
       
