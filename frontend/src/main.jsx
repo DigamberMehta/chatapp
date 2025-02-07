@@ -1,13 +1,11 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/HomePage";
-import { AuthProvider } from "./context/authContext";
 import CallHistory from "./components/home/CallHistory";
-import ChatBot from "./components/ChatBot/chatBot";
+import Test from "./pages/test";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,8 +20,8 @@ const router = createBrowserRouter([
         element: <CallHistory />,
       },
       {
-        path: "/chatbot",
-        element: <ChatBot />,
+        path: "/test",
+        element: <Test />,
       },
       {
         path: "/auth",
