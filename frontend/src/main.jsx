@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/HomePage";
 import CallHistory from "./components/home/CallHistory";
-import Test from "./pages/test";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
       {
         path: "/call",
         element: <CallHistory />,
-      },
-      {
-        path: "/test",
-        element: <Test />,
       },
       {
         path: "/auth",

@@ -14,16 +14,18 @@ import { useState, useContext } from "react";
 import authContext from "../context/authContext";
 
 const Login = () => {
-  const [loginInput, setLoginInput] = useState({ email: "", password: "" });
+  const [loginInput, setLoginInput] = useState({ username: "", password: "" });
   const [signupInput, setSignupInput] = useState({
     name: "",
+    username: "",
     email: "",
     password: "",
   });
+
   const { user, isLoading, isError, registerUser, loginUser } =
     useContext(authContext);
 
-    console.log(user, isLoading, isError);
+  console.log(user, isLoading, isError);
 
   const changeInputHandler = (e, type) => {
     const { name, value } = e.target;
@@ -54,6 +56,8 @@ const Login = () => {
           <TabsTrigger value="Signup">Signup</TabsTrigger>
           <TabsTrigger value="Login">Login</TabsTrigger>
         </TabsList>
+
+        {/* Signup Form */}
         <TabsContent value="Signup">
           <Card>
             <CardHeader>
@@ -70,6 +74,17 @@ const Login = () => {
                   required
                   name="name"
                   value={signupInput.name}
+                />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="username">Username</Label>
+                <Input
+                  onChange={(e) => changeInputHandler(e, "signup")}
+                  type="text"
+                  placeholder="Eg. akash123"
+                  required
+                  name="username"
+                  value={signupInput.username}
                 />
               </div>
               <div className="space-y-1">
@@ -102,6 +117,8 @@ const Login = () => {
             </CardFooter>
           </Card>
         </TabsContent>
+
+        {/* Login Form */}
         <TabsContent value="Login">
           <Card>
             <CardHeader>
@@ -110,18 +127,18 @@ const Login = () => {
             </CardHeader>
             <CardContent className="space-y-2">
               <div className="space-y-1">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="username">Username</Label>
                 <Input
-                  type="email"
-                  placeholder="example@email.com"
+                  type="text"
+                  placeholder="Eg. akash123"
                   required
                   onChange={(e) => changeInputHandler(e, "login")}
-                  name="email"
-                  value={loginInput.email}
+                  name="username"
+                  value={loginInput.username}
                 />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="new">New password</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
                   type="password"
                   name="password"
