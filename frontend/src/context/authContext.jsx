@@ -8,18 +8,18 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
 
-  // Helper: Fetch the authenticated user (on page refresh or initial load)
+  const API_URL = 'http://localhost/chatapp/api/';
+
+  // Fetch User (Check Session)
   const fetchUser = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/v1/user/profile', {
-        withCredentials: true, // Include cookies
+      const response = await axios.get(`${API_URL}profile.php`, {
+        withCredentials: true, // Include cookies for session handling
       });
-      setUser(response.data.user);
+      setUser(response.data.user || null);
     } catch (error) {
-      console.error('Error fetching user:', error.response?.data?.message || error.message);
       setUser(null);
     }
-    
   };
 
   // Register User
@@ -27,12 +27,10 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/v1/user/register',
-        userData,
-        { withCredentials: true } // Include cookies
-      );
-      setUser(response.data.user); // Server sends user data in the response
+      const response = await axios.post(`${API_URL}register.php`, userData, {
+        withCredentials: true,
+      });
+      setUser(response.data.user);
     } catch (error) {
       setIsError(error.response?.data?.message || 'Registration failed');
     } finally {
@@ -45,12 +43,10 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     setIsError(null);
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/v1/user/login',
-        credentials,
-        { withCredentials: true } // Include cookies
-      );
-      setUser(response.data.user); // Server sends user data in the response
+      const response = await axios.post(`${API_URL}login.php`, credentials, {
+        withCredentials: true,
+      });
+      setUser(response.data.user);
     } catch (error) {
       setIsError(error.response?.data?.message || 'Login failed');
     } finally {
@@ -63,12 +59,8 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
     setIsError(null);
     try {
-      await axios.post(
-        'http://localhost:3000/api/v1/user/logout',
-        {}, // Body is empty for logout
-        { withCredentials: true } // Include cookies
-      );
-      setUser(null); // Clear user state
+      await axios.post(`${API_URL}logout.php`, {}, { withCredentials: true });
+      setUser(null);
     } catch (error) {
       setIsError(error.response?.data?.message || 'Logout failed');
     } finally {
@@ -77,7 +69,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // Check if a user is already logged in on component mount
     fetchUser();
   }, []);
 
