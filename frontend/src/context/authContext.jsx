@@ -12,9 +12,18 @@ export const AuthProvider = ({ children }) => {
 
   // Fetch User (Check Session)
   const fetchUser = async () => {
+    const token = localStorage.getItem('jwt_token'); // Get JWT from localStorage
+    if (!token) {
+      setUser(null);
+      return;
+    }
+
     try {
       const response = await axios.get(`${API_URL}profile.php`, {
-        withCredentials: true, // Include cookies for session handling
+        headers: {
+          Authorization: `Bearer ${token}`, // Send token in Authorization header
+        },
+        withCredentials: true, // Include cookies if needed
       });
       setUser(response.data.user || null);
     } catch (error) {
@@ -30,14 +39,17 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(`${API_URL}register.php`, userData, {
         withCredentials: true,
       });
+      console.log("Registration Success:", response.data);
+      localStorage.setItem('jwt_token', response.data.token);
       setUser(response.data.user);
     } catch (error) {
+      console.error("Registration Error:", error.response?.data || error.message);
       setIsError(error.response?.data?.message || 'Registration failed');
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   // Login User
   const loginUser = async (credentials) => {
     setIsLoading(true);
@@ -46,6 +58,9 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(`${API_URL}login.php`, credentials, {
         withCredentials: true,
       });
+      const token = response.data.token;
+      // Store token in localStorage
+      localStorage.setItem('jwt_token', token);
       setUser(response.data.user);
     } catch (error) {
       setIsError(error.response?.data?.message || 'Login failed');
@@ -60,6 +75,8 @@ export const AuthProvider = ({ children }) => {
     setIsError(null);
     try {
       await axios.post(`${API_URL}logout.php`, {}, { withCredentials: true });
+      // Remove token from localStorage
+      localStorage.removeItem('jwt_token');
       setUser(null);
     } catch (error) {
       setIsError(error.response?.data?.message || 'Logout failed');

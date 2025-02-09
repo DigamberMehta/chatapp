@@ -30,13 +30,13 @@ const Message = MessageModel(sequelize);
 // Define Associations with Cascading
 Chat.hasMany(Message, { 
   foreignKey: 'chat_id',
-  onDelete: 'CASCADE' // Delete messages when chat is deleted
+  onDelete: 'CASCADE', // Delete messages when chat is deleted
 });
 Message.belongsTo(Chat, { foreignKey: 'chat_id' });
 
 User.hasMany(Message, { 
   foreignKey: 'sender_id',
-  onDelete: 'CASCADE' // Delete messages when user is deleted
+  onDelete: 'CASCADE', // Delete messages when user is deleted
 });
 Message.belongsTo(User, { foreignKey: 'sender_id' });
 
@@ -44,13 +44,13 @@ Chat.belongsToMany(User, {
   through: ChatMember,
   foreignKey: 'chat_id',
   otherKey: 'user_id',
-  onDelete: 'CASCADE' // Remove members when chat is deleted
+  onDelete: 'CASCADE', // Remove members when chat is deleted
 });
 User.belongsToMany(Chat, { 
   through: ChatMember,
   foreignKey: 'user_id',
   otherKey: 'chat_id',
-  onDelete: 'CASCADE' // Remove members when user is deleted
+  onDelete: 'CASCADE', // Remove members when user is deleted
 });
 
 // Sync Database (optional)

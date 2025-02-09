@@ -9,7 +9,7 @@ const MessageModel = (sequelize) => {
       primaryKey: true,
     },
     chat_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING, // Changed to STRING for UUID
       allowNull: false,
     },
     sender_id: {

@@ -9,7 +9,7 @@ const ChatMemberModel = (sequelize) => {
       primaryKey: true,
     },
     chat_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING, // Changed to STRING for UUID
       allowNull: false,
     },
     user_id: {
@@ -28,10 +28,9 @@ const ChatMemberModel = (sequelize) => {
     tableName: 'ChatMembers',
     timestamps: false,
     indexes: [
-      // Prevent duplicate members in the same chat
       {
         unique: true,
-        fields: ['chat_id', 'user_id'],
+        fields: ['chat_id', 'user_id'], // Prevent duplicate members in the same chat
       },
     ],
   });
