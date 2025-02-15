@@ -20,7 +20,7 @@ export default function Carousel3D() {
   };
 
   return (
-    <div className="relative w-full flex items-center justify-center h-fit overflow-hidden">
+    <div className="relative w-full flex items-center justify-center h-fit overflow-hidden mt-[24px]">
       <div className="relative w-[800px] h-[600px] flex justify-center items-center perspective-[1500px]">
         {images.map((img, i) => {
           const offset = ((i - index + images.length + images.length) % images.length) - 1;
